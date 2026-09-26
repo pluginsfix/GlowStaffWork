@@ -1,0 +1,73 @@
+no-permission:
+  - "[message] &#FB8808▶ &fНедостаточно &#FB8808прав на использование &fданной команды!"
+  - "[sound] BLOCK_ANVIL_LAND"
+
+player-only:
+  - "[message] &#FB8808▶ &fДанная команда доступна только &#FB8808игрокам&f!"
+  - "[sound] BLOCK_ANVIL_LAND"
+
+unknown-subcommand:
+  - "[message] &#FB8808▶ &fНеизвестная подкоманда! Используйте: &#FFFF00/sw help"
+  - "[sound] BLOCK_ANVIL_LAND"
+
+target-not-found:
+  - "[message] &#FB8808▶ &fИгрок &#FB8808{player} &fне найден в базе данных!"
+  - "[sound] BLOCK_ANVIL_LAND"
+
+already-on:
+  - "[message] &#FB8808▶ &fВы уже находитесь &#FFFF00на смене&f!"
+  - "[sound] BLOCK_ANVIL_LAND"
+
+already-off:
+  - "[message] &#FB8808▶ &fВы ещё не начинали &#FB8808рабочую смену&f!"
+  - "[sound] BLOCK_ANVIL_LAND"
+
+work-on:
+  - "[message] &#FFFF00◆ &fВы успешно &#FFFF00вышли на смену&f! Приятной работы."
+  - "[actionbar] &#FFFF00◆ &fВы вышли на смену &#FFFF00◆"
+  - "[title] &#FFFF00РАБОТА НАЧАТА; &fУдачной смены!; 10; 40; 10"
+  - "[sound] ENTITY_PLAYER_LEVELUP"
+
+work-off:
+  - "[message] &#FFFF00◆ &fВы успешно &#FFFF00завершили смену&f!"
+  - "[message] &#FFFF00◆ &fВремя текущей смены: &#FFFF00{session_time}"
+  - "[message] &#FFFF00◆ &fВсего отработано сегодня: &#FFFF00{today_time}"
+  - "[actionbar] &#FB8808◆ &fСмена завершена &8(&#FFFF00{session_time}&8)"
+  - "[title] &#FB8808СМЕНА ОКОНЧЕНА; &fОтработано: &#FFFF00{session_time}; 10; 40; 10"
+  - "[sound] ENTITY_EXPERIENCE_ORB_PICKUP"
+
+broadcast-on:
+  - "[message] &#FFFF00◆ &fСотрудник &#FFFF00{player} &fвышел на смену."
+
+broadcast-off:
+  - "[message] &#FB8808◆ &fСотрудник &#FB8808{player} &fзавершил смену &8(&#FFFF00{session_time}&8)."
+
+info:
+  - "[message] "
+  - "[message] &#FFFF00▶ &fИнформация о сотруднике &#FFFF00{player}&f:"
+  - "[message] "
+  - "[message]   &#FFFF00◆ &fТекущий статус: {status_formatted}"
+  - "[message]   &#FFFF00◆ &fТекущая смена: &#FFFF00{session_time}"
+  - "[message]   &#FFFF00◆ &fОтработано сегодня: &#FFFF00{today_time}"
+  - "[message]   &#FFFF00◆ &fВсего отработано: &#FFFF00{total_time}"
+  - "[message]   &#FFFF00◆ &fВсего смен: &#FFFF00{sessions_count}"
+  - "[message]   &#FFFF00◆ &fПоследняя активность: &#FFFF00{last_seen}"
+  - "[message] "
+
+status-on: "&#FFFF00На смене"
+status-off: "&#FB8808Не на смене"
+status-none: "&#FB8808—"
+
+reloaded:
+  - "[message] &#FFFF00◆ &fКонфигурация &#FFFF00GlowStaffWork &fуспешно перезагружена!"
+  - "[sound] ENTITY_EXPERIENCE_ORB_PICKUP"
+
+help:
+  - "[message] "
+  - "[message] &#FFFF00▶ &fСписок команд &#FFFF00GlowStaffWork&f:"
+  - "[message] "
+  - "[message]   &#FFFF00◆ &f/sw on &8— &fначать рабочую смену"
+  - "[message]   &#FFFF00◆ &f/sw off &8— &fзавершить рабочую смену"
+  - "[message]   &#FFFF00◆ &f/sw info &8[&7ник&8] &8— &fпосмотреть статистику работы"
+  - "[message]   &#FFFF00◆ &f/sw reload &8— &fперезагрузить конфигурацию"
+  - "[message] "

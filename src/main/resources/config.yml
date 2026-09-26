@@ -1,0 +1,20 @@
+config-version: 1
+
+auto-off-on-quit: true
+save-interval-minutes: 5
+
+commands:
+  on:
+    - "gamemode creative {player}"
+  off:
+    - "gamemode survival {player}"
+
+broadcast:
+  enabled: true
+  permission: "glowstaffwork.staff"
+
+database:
+  type: sqlite
+  file: staffwork.db
+  pool-size: 4
+  connection-timeout-ms: 5000

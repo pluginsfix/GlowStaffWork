@@ -1,0 +1,27 @@
+name: GlowStaffWork
+version: '${project.version}'
+main: pluginsfix.glowstaffwork.GlowStaffWork
+api-version: '1.21'
+author: pluginsfix
+softdepend:
+  - PlaceholderAPI
+commands:
+  glowstaffwork:
+    description: Main GlowStaffWork command
+    aliases:
+      - sw
+      - staffwork
+    permission: glowstaffwork.use
+permissions:
+  glowstaffwork.use:
+    description: Allows player to use staff work commands
+    default: op
+  glowstaffwork.staff:
+    description: Allows player to receive staff work announcements
+    default: op
+  glowstaffwork.info.others:
+    description: Allows player to view staff work info of other players
+    default: op
+  glowstaffwork.admin:
+    description: Allows reloading plugin configuration
+    default: op
