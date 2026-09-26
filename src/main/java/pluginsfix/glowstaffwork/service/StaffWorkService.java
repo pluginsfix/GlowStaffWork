@@ -5,12 +5,12 @@ import pluginsfix.glowstaffwork.config.PluginConfig;
 import pluginsfix.glowstaffwork.domain.StaffProfile;
 import pluginsfix.glowstaffwork.domain.StaffSession;
 import pluginsfix.glowstaffwork.domain.TimeFormatter;
+import pluginsfix.glowstaffwork.hook.LiteBansHook;
 import pluginsfix.glowstaffwork.platform.PlatformScheduler;
 import pluginsfix.glowstaffwork.storage.StorageRepository;
 import pluginsfix.glowstaffwork.text.Messages;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -23,6 +23,7 @@ public final class StaffWorkService {
     private final PluginConfig config;
     private final Messages messages;
     private final PlatformScheduler scheduler;
+    private final LiteBansHook liteBansHook;
     private final Logger logger;
 
     private final Map<UUID, StaffSession> activeSessions = new ConcurrentHashMap<>();
@@ -33,12 +34,14 @@ public final class StaffWorkService {
             PluginConfig config,
             Messages messages,
             PlatformScheduler scheduler,
+            LiteBansHook liteBansHook,
             Logger logger
     ) {
         this.repository = repository;
         this.config = config;
         this.messages = messages;
         this.scheduler = scheduler;
+        this.liteBansHook = liteBansHook;
         this.logger = logger;
     }
 
@@ -145,23 +148,23 @@ public final class StaffWorkService {
     }
 
     public CompletableFuture<Optional<StaffStatsView>> getStats(UUID uuid, String fallbackName) {
-        return loadOrCreateProfile(uuid, fallbackName).thenApply(profile -> {
+        return loadOrCreateProfile(uuid, fallbackName).thenCompose(profile -> {
             boolean active = isOnDuty(uuid);
             long now = System.currentTimeMillis();
             long currentDayEpoch = LocalDate.now().toEpochDay();
 
-            long currentSessionSec = 0L;
+            long sessionDuration = 0L;
             if (active) {
                 StaffSession session = this.activeSessions.get(uuid);
                 if (session != null) {
-                    currentSessionSec = session.durationSeconds(now);
+                    sessionDuration = session.durationSeconds(now);
                 }
             }
+            final long currentSessionSec = sessionDuration;
+            final long todaySec = profile.effectiveTodayTime(currentDayEpoch) + currentSessionSec;
+            final long totalSec = profile.totalTimeSeconds() + currentSessionSec;
 
-            long todaySec = profile.effectiveTodayTime(currentDayEpoch) + currentSessionSec;
-            long totalSec = profile.totalTimeSeconds() + currentSessionSec;
-
-            return Optional.of(new StaffStatsView(
+            return this.liteBansHook.getPunishments(uuid, profile.playerName()).thenApply(punishments -> Optional.of(new StaffStatsView(
                     profile.uuid(),
                     profile.playerName(),
                     active,
@@ -169,8 +172,13 @@ public final class StaffWorkService {
                     todaySec,
                     totalSec,
                     profile.totalSessions(),
-                    profile.lastSeenEpoch()
-            ));
+                    profile.lastSeenEpoch(),
+                    punishments.bans(),
+                    punishments.mutes(),
+                    punishments.kicks(),
+                    punishments.warns(),
+                    punishments.total()
+            )));
         });
     }
 
@@ -258,7 +266,12 @@ public final class StaffWorkService {
             long todaySeconds,
             long totalSeconds,
             int totalSessions,
-            long lastSeenEpochMillis
+            long lastSeenEpochMillis,
+            long bans,
+            long mutes,
+            long kicks,
+            long warns,
+            long totalPunishments
     ) {
     }
 }

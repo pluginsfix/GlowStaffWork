@@ -51,6 +51,11 @@ info:
   - "[message]   &#FFFF00◆ &fОтработано сегодня: &#FFFF00{today_time}"
   - "[message]   &#FFFF00◆ &fВсего отработано: &#FFFF00{total_time}"
   - "[message]   &#FFFF00◆ &fВсего смен: &#FFFF00{sessions_count}"
+  - "[message]   &#FFFF00◆ &fВыдано банов: &#FFFF00{bans_count}"
+  - "[message]   &#FFFF00◆ &fВыдано мутов: &#FFFF00{mutes_count}"
+  - "[message]   &#FFFF00◆ &fВыдано киков: &#FFFF00{kicks_count}"
+  - "[message]   &#FFFF00◆ &fВыдано варнов: &#FFFF00{warns_count}"
+  - "[message]   &#FFFF00◆ &fВсего наказаний: &#FFFF00{punishments_total}"
   - "[message]   &#FFFF00◆ &fПоследняя активность: &#FFFF00{last_seen}"
   - "[message] "
 

@@ -6,6 +6,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import pluginsfix.glowstaffwork.command.StaffWorkCommand;
 import pluginsfix.glowstaffwork.config.PluginConfig;
+import pluginsfix.glowstaffwork.hook.LiteBansHook;
 import pluginsfix.glowstaffwork.hook.PlaceholderApiHook;
 import pluginsfix.glowstaffwork.listener.StaffWorkListener;
 import pluginsfix.glowstaffwork.platform.PlatformScheduler;
@@ -22,6 +23,7 @@ public final class GlowStaffWork extends JavaPlugin {
     private PlatformScheduler scheduler;
     private StorageRepository repository;
     private StaffWorkService service;
+    private LiteBansHook liteBansHook;
     private PlaceholderApiHook placeholderHook;
 
     @Override
@@ -30,6 +32,7 @@ public final class GlowStaffWork extends JavaPlugin {
         this.config = PluginConfig.fromYaml(getConfig());
         this.messages = new Messages(this);
         this.scheduler = new PlatformScheduler(this);
+        this.liteBansHook = new LiteBansHook();
 
         File databaseFile = new File(getDataFolder(), this.config.databaseFile());
         this.repository = new SqliteStorageRepository(
@@ -45,6 +48,7 @@ public final class GlowStaffWork extends JavaPlugin {
                 this.config,
                 this.messages,
                 this.scheduler,
+                this.liteBansHook,
                 getLogger()
         );
         this.service.startAutoSave();

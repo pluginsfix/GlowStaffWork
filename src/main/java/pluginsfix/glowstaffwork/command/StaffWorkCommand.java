@@ -113,14 +113,19 @@ public final class StaffWorkCommand implements CommandExecutor, TabCompleter {
                     ? TimeFormatter.formatDuration(stats.currentSessionSeconds())
                     : this.messages.getFormattedString("status-none", Collections.emptyMap());
 
-            Map<String, String> placeholders = Map.of(
-                    "player", stats.playerName(),
-                    "status_formatted", statusFormatted,
-                    "session_time", sessionTime,
-                    "today_time", TimeFormatter.formatDuration(stats.todaySeconds()),
-                    "total_time", TimeFormatter.formatDuration(stats.totalSeconds()),
-                    "sessions_count", String.valueOf(stats.totalSessions()),
-                    "last_seen", TimeFormatter.formatDate(stats.lastSeenEpochMillis())
+            Map<String, String> placeholders = Map.ofEntries(
+                    Map.entry("player", stats.playerName()),
+                    Map.entry("status_formatted", statusFormatted),
+                    Map.entry("session_time", sessionTime),
+                    Map.entry("today_time", TimeFormatter.formatDuration(stats.todaySeconds())),
+                    Map.entry("total_time", TimeFormatter.formatDuration(stats.totalSeconds())),
+                    Map.entry("sessions_count", String.valueOf(stats.totalSessions())),
+                    Map.entry("bans_count", String.valueOf(stats.bans())),
+                    Map.entry("mutes_count", String.valueOf(stats.mutes())),
+                    Map.entry("kicks_count", String.valueOf(stats.kicks())),
+                    Map.entry("warns_count", String.valueOf(stats.warns())),
+                    Map.entry("punishments_total", String.valueOf(stats.totalPunishments())),
+                    Map.entry("last_seen", TimeFormatter.formatDate(stats.lastSeenEpochMillis()))
             );
 
             this.messages.send(sender, "info", placeholders);

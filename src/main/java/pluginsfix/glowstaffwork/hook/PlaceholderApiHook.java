@@ -91,6 +91,36 @@ public final class PlaceholderApiHook extends PlaceholderExpansion {
                         .map(stats -> String.valueOf(stats.totalSessions()))
                         .orElse("0");
             }
+            case "bans" -> {
+                return this.service.getStats(player.getUniqueId(), player.getName() != null ? player.getName() : "")
+                        .join()
+                        .map(stats -> String.valueOf(stats.bans()))
+                        .orElse("0");
+            }
+            case "mutes" -> {
+                return this.service.getStats(player.getUniqueId(), player.getName() != null ? player.getName() : "")
+                        .join()
+                        .map(stats -> String.valueOf(stats.mutes()))
+                        .orElse("0");
+            }
+            case "kicks" -> {
+                return this.service.getStats(player.getUniqueId(), player.getName() != null ? player.getName() : "")
+                        .join()
+                        .map(stats -> String.valueOf(stats.kicks()))
+                        .orElse("0");
+            }
+            case "warns" -> {
+                return this.service.getStats(player.getUniqueId(), player.getName() != null ? player.getName() : "")
+                        .join()
+                        .map(stats -> String.valueOf(stats.warns()))
+                        .orElse("0");
+            }
+            case "punishments_total" -> {
+                return this.service.getStats(player.getUniqueId(), player.getName() != null ? player.getName() : "")
+                        .join()
+                        .map(stats -> String.valueOf(stats.totalPunishments()))
+                        .orElse("0");
+            }
             case "last_seen" -> {
                 return this.service.getStats(player.getUniqueId(), player.getName() != null ? player.getName() : "")
                         .join()

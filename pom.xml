@@ -6,11 +6,11 @@
 
     <groupId>pluginsfix.glowstaffwork</groupId>
     <artifactId>GlowStaffWork</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>GlowStaffWork</name>
-    <description>Staff duty and work management plugin for Paper and Folia servers</description>
+    <description>Staff duty and work management plugin for Paper and Folia servers with LiteBans integration</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,6 +21,7 @@
         <hikaricp.version>5.1.0</hikaricp.version>
         <sqlite.version>3.47.1.0</sqlite.version>
         <placeholderapi.version>2.11.6</placeholderapi.version>
+        <litebans.version>0.5.0</litebans.version>
         <junit.version>5.10.2</junit.version>
         <assertj.version>3.26.0</assertj.version>
     </properties>
@@ -29,6 +30,10 @@
         <repository>
             <id>papermc</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
         </repository>
         <repository>
             <id>extendedclip</id>
@@ -52,6 +57,13 @@
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>${placeholderapi.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gitlab.ruany</groupId>
+            <artifactId>LiteBansAPI</artifactId>
+            <version>${litebans.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -135,6 +147,7 @@
                                     <exclude>io.papermc.paper:*</exclude>
                                     <exclude>net.kyori:*</exclude>
                                     <exclude>org.slf4j:*</exclude>
+                                    <exclude>com.gitlab.ruany:*</exclude>
                                 </excludes>
                             </artifactSet>
                             <filters>

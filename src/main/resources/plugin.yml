@@ -5,6 +5,7 @@ api-version: '1.21'
 author: pluginsfix
 softdepend:
   - PlaceholderAPI
+  - LiteBans
 commands:
   glowstaffwork:
     description: Main GlowStaffWork command
